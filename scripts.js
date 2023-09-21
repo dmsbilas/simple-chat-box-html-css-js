@@ -39,16 +39,14 @@ $(document).ready(function () {
         var d = $('#chat_history');
         d.scrollTop(d.prop("scrollHeight"));
 
-
-
-
     });
+}); //jQuery ends
 
 
-
-});
-
-
+/**
+ * Scratch JS 
+ * @returns 
+ */
 function getDateTime() {
     var currentdate = new Date();
     var datetime = currentdate.getDate() + "/"
