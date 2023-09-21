@@ -19,25 +19,45 @@ $(document).ready(function () {
         /**
          * Make ajax call to send text to backend api
          */
+        $.ajax({
+            url: "https://httpbin.org/anything",
+            data: { "query": $user_text },
+            type: "POST",
+            beforeSend: function (xhr) { xhr.setRequestHeader('authorization', 'adsfaawerjhjknafkannkjrehker'); },
+            success: function (response) {
+                /**
+                * Add bot text to chat history UI
+                */
+                $bot_text = response.form.query;
+
+                $bot_text_li_elem = '<li><div class="message-data"><span class="message-data-name"><img width="35px;" src="bot-image.png" alt="avatar" /> BOT</span><span class="message-data-time">' + $date_time + '</span></div><div class="message my-message">' + $bot_text + '</div></li>';
+                $(".chat-history").append($bot_text_li_elem);
+                // console.log(response.form.query);
+                /**
+                 * Scroll down the chat box for better experience
+                 */
+                var d = $('#chat_history');
+                d.scrollTop(d.prop("scrollHeight"));
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        });
 
 
         /**
         * Add bot text to chat history UI
         */
-        $bot_text = "I am bot text";
-        $bot_text_li_elem = '<li><div class="message-data"><span class="message-data-name"><img width="35px;" src="bot-image.png" alt="avatar" /> BOT</span><span class="message-data-time">' + $date_time + '</span></div><div class="message my-message">' + $bot_text + '</div></li>';
-        $(".chat-history").append($bot_text_li_elem);
+        // $bot_text = "I am bot text";
+        // $bot_text_li_elem = '<li><div class="message-data"><span class="message-data-name"><img width="35px;" src="bot-image.png" alt="avatar" /> BOT</span><span class="message-data-time">' + $date_time + '</span></div><div class="message my-message">' + $bot_text + '</div></li>';
+        // $(".chat-history").append($bot_text_li_elem);
         //clear user text from text area
         // $("#message-to-send").val('').empty();
 
 
 
 
-        /**
-         * Scroll down the chat box for better experience
-         */
-        var d = $('#chat_history');
-        d.scrollTop(d.prop("scrollHeight"));
+
 
     });
 }); //jQuery ends
@@ -56,4 +76,16 @@ function getDateTime() {
         + currentdate.getMinutes() + ":"
         + currentdate.getSeconds();
     return datetime;
+}
+
+function botTyping(){
+    setTimeout(function() {
+        $('#intro').typed({
+          strings: [
+            "Hi! I'm Robert and currently I am studying to be a full-stack developer with a focus on front-end development."
+          ],
+          typeSpeed: 5,
+          contentType: 'html'
+        });
+      }, 500);
 }
