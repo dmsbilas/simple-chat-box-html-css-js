@@ -19,12 +19,17 @@
       </div> <!-- end chat-header -->
       <div class="chat-history" id="chat_history">
         <ul>
-          <li><span id="text_typing"></span></li>
+          <li class="clearfix" style="list-style-type: none;">
+            <div class="message-data align-right">
+              <div class="message other-message float-right"> Hello, please ask your question. </div>
+            </div>
+          </li>
         </ul>
 
       </div> <!-- end chat-history -->
 
       <div class="chat-message clearfix">
+        <div class="typing-loader" style=""></div>
         <textarea name="message-to-send" id="message-to-send" placeholder="Type your message" rows="3"></textarea>
         <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
         <i class="fa fa-file-image-o"></i>

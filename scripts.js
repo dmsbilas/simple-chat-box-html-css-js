@@ -3,8 +3,6 @@ $(document).ready(function () {
     $("#send_button").click(function () {
         $date_time = getDateTime();
         $user_text = $("#message-to-send").val();
-
-
         /**
          * Add user question in the UI
          */
@@ -13,13 +11,18 @@ $(document).ready(function () {
         $(".chat-history").append($user_text_li_elem);
         //clear user text from text area
         $("#message-to-send").val('').empty();
-
+        $(".typing-loader").show();
 
 
         /**
          * Make ajax call to send text to backend api
          */
         $.get("http://161.97.148.36:8000/web-bot?user_message="+$user_text, function(data, status){
+            /**
+             * Show loader
+             */
+            
+            $(".typing-loader").hide();
              /**
             * Add bot text to chat history UI
             */
@@ -31,6 +34,7 @@ $(document).ready(function () {
              */
             var d = $('#chat_history');
             d.scrollTop(d.prop("scrollHeight"));
+            readBotText($bot_text);
           });
 
     });
@@ -51,3 +55,13 @@ function getDateTime() {
         + currentdate.getSeconds();
     return datetime;
 }
+
+
+function readBotText(text){
+    var msg = new SpeechSynthesisUtterance();
+    if(text !== ''){
+        msg.text = text;
+        window.speechSynthesis.speak(msg);
+    }
+}
+
