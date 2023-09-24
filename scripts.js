@@ -9,7 +9,7 @@ $(document).ready(function () {
          * Add user question in the UI
          */
 
-        $user_text_li_elem = '<li class="clearfix"><div class="message-data align-right"><span class="message-data-time">' + $date_time + '</span> &nbsp; &nbsp;<span class="message-data-name">You</span> <i class="fa fa-circle me"></i></div><div class="message other-message float-right">' + $user_text + '</div></li> ';
+        $user_text_li_elem = '<li class="clearfix" style="list-style-type: none;"><div class="message-data align-right"><span class="message-data-time">' + $date_time + '</span> &nbsp; &nbsp;<span class="message-data-name">You</span> <i class="fa fa-circle me"></i></div><div class="message other-message float-right">' + $user_text + '</div></li> ';
         $(".chat-history").append($user_text_li_elem);
         //clear user text from text area
         $("#message-to-send").val('').empty();
@@ -20,17 +20,17 @@ $(document).ready(function () {
          * Make ajax call to send text to backend api
          */
         $.ajax({
-            url: "https://httpbin.org/anything",
+            url: "http://161.97.148.36:8000/web-bot",
             data: { "query": $user_text },
-            type: "POST",
+            type: "GET",
             beforeSend: function (xhr) { xhr.setRequestHeader('authorization', 'adsfaawerjhjknafkannkjrehker'); },
             success: function (response) {
                 /**
                 * Add bot text to chat history UI
                 */
+               console.log(response);
                 $bot_text = response.form.query;
-
-                $bot_text_li_elem = '<li><div class="message-data"><span class="message-data-name"><img width="35px;" src="bot-image.png" alt="avatar" /> BOT</span><span class="message-data-time">' + $date_time + '</span></div><div class="message my-message">' + $bot_text + '</div></li>';
+                $bot_text_li_elem = '<li style="list-style-type: none;"><div class="message-data"><span class="message-data-name"><img width="35px;" style="border-radius: 45px;" src="bot-image.png" alt="avatar" /> BOT</span><span class="message-data-time">' + $date_time + '</span></div><div class="message my-message">' + $bot_text + '</div></li>';
                 $(".chat-history").append($bot_text_li_elem);
                 // console.log(response.form.query);
                 /**
@@ -76,16 +76,4 @@ function getDateTime() {
         + currentdate.getMinutes() + ":"
         + currentdate.getSeconds();
     return datetime;
-}
-
-function botTyping(){
-    setTimeout(function() {
-        $('#intro').typed({
-          strings: [
-            "Hi! I'm Robert and currently I am studying to be a full-stack developer with a focus on front-end development."
-          ],
-          typeSpeed: 5,
-          contentType: 'html'
-        });
-      }, 500);
 }
