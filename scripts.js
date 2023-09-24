@@ -20,10 +20,11 @@ $(document).ready(function () {
          * Make ajax call to send text to backend api
          */
         $.get("http://161.97.148.36:8000/web-bot?user_message="+$user_text, function(data, status){
-            // alert("Data: " + data + "\nStatus: " + status);
-            console.log(data.message);
+             /**
+            * Add bot text to chat history UI
+            */
             $bot_text = data.message;
-            $bot_text_li_elem = '<li style="list-style-type: none;"><div class="message-data"><span class="message-data-name"><img width="35px;" style="border-radius: 45px;" src="bot-image.png" alt="avatar" /> BOT</span><span class="message-data-time">' + $date_time + '</span></div><div class="message my-message">' + $bot_text + '</div></li>';
+            $bot_text_li_elem = '<li style="list-style-type: none;"><div class="message-data"><span class="message-data-name"><img width="35px;" style="border-radius: 45px;" src="bot-image.jpg" alt="avatar" /> BOT</span><span class="message-data-time">' + $date_time + '</span></div><div class="message my-message">' + $bot_text + '</div></li>';
             $(".chat-history").append($bot_text_li_elem);
             /**
              * Scroll down the chat box for better experience
@@ -31,45 +32,6 @@ $(document).ready(function () {
             var d = $('#chat_history');
             d.scrollTop(d.prop("scrollHeight"));
           });
-        // $.ajax({
-        //     url: "http://161.97.148.36:8000/web-bot",
-        //     data: { "user_message": $user_text },
-        //     type: "GET",
-        //     beforeSend: function (xhr) { xhr.setRequestHeader('authorization', 'adsfaawerjhjknafkannkjrehker'); },
-        //     success: function (response) {
-        //         /**
-        //         * Add bot text to chat history UI
-        //         */
-        //        console.log(response);
-        //         $bot_text = response.form.query;
-        //         $bot_text_li_elem = '<li style="list-style-type: none;"><div class="message-data"><span class="message-data-name"><img width="35px;" style="border-radius: 45px;" src="bot-image.png" alt="avatar" /> BOT</span><span class="message-data-time">' + $date_time + '</span></div><div class="message my-message">' + $bot_text + '</div></li>';
-        //         $(".chat-history").append($bot_text_li_elem);
-        //         // console.log(response.form.query);
-        //         /**
-        //          * Scroll down the chat box for better experience
-        //          */
-        //         var d = $('#chat_history');
-        //         d.scrollTop(d.prop("scrollHeight"));
-        //     },
-        //     error: function (xhr, status, error) {
-        //         console.log(error);
-        //     }
-        // });
-
-
-        /**
-        * Add bot text to chat history UI
-        */
-        // $bot_text = "I am bot text";
-        // $bot_text_li_elem = '<li><div class="message-data"><span class="message-data-name"><img width="35px;" src="bot-image.png" alt="avatar" /> BOT</span><span class="message-data-time">' + $date_time + '</span></div><div class="message my-message">' + $bot_text + '</div></li>';
-        // $(".chat-history").append($bot_text_li_elem);
-        //clear user text from text area
-        // $("#message-to-send").val('').empty();
-
-
-
-
-
 
     });
 }); //jQuery ends
