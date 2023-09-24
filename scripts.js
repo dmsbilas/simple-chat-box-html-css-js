@@ -19,7 +19,7 @@ $(document).ready(function () {
         /**
          * Make ajax call to send text to backend api
          */
-        $.get("http://161.97.148.36:8000/web-bot?user_message="+user_text, function(data, status){
+        $.get("http://161.97.148.36:8000/web-bot?user_message="+$user_text, function(data, status){
             alert("Data: " + data + "\nStatus: " + status);
           });
         // $.ajax({
