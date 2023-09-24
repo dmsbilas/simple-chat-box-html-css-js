@@ -21,7 +21,15 @@ $(document).ready(function () {
          */
         $.get("http://161.97.148.36:8000/web-bot?user_message="+$user_text, function(data, status){
             // alert("Data: " + data + "\nStatus: " + status);
-            console.log(data);
+            console.log(data.message);
+            $bot_text = data.message;
+            $bot_text_li_elem = '<li style="list-style-type: none;"><div class="message-data"><span class="message-data-name"><img width="35px;" style="border-radius: 45px;" src="bot-image.png" alt="avatar" /> BOT</span><span class="message-data-time">' + $date_time + '</span></div><div class="message my-message">' + $bot_text + '</div></li>';
+            $(".chat-history").append($bot_text_li_elem);
+            /**
+             * Scroll down the chat box for better experience
+             */
+            var d = $('#chat_history');
+            d.scrollTop(d.prop("scrollHeight"));
           });
         // $.ajax({
         //     url: "http://161.97.148.36:8000/web-bot",
