@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+    $("#audio_status_off").click(function(){
+        stopAudio();
+    });
+
     $("#send_button").click(function () {
         $date_time = getDateTime();
         $user_text = $("#message-to-send").val();
@@ -34,7 +38,15 @@ $(document).ready(function () {
              */
             var d = $('#chat_history');
             d.scrollTop(d.prop("scrollHeight"));
-            readBotText($bot_text);
+
+            
+            if ($("#audio_status_on").is(":checked")) {
+                readBotText($bot_text);
+             }
+             if ($("#audio_status_off").is(":checked")) {
+                stopAudio();
+             }
+            
           });
 
     });
@@ -65,3 +77,6 @@ function readBotText(text){
     }
 }
 
+function stopAudio(){
+    return window.speechSynthesis.cancel();
+}
