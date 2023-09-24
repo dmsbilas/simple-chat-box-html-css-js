@@ -21,7 +21,7 @@ $(document).ready(function () {
          */
         $.ajax({
             url: "http://161.97.148.36:8000/web-bot",
-            data: { "query": $user_text },
+            data: { "user_message": $user_text },
             type: "GET",
             beforeSend: function (xhr) { xhr.setRequestHeader('authorization', 'adsfaawerjhjknafkannkjrehker'); },
             success: function (response) {
